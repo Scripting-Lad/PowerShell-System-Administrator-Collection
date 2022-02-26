@@ -1,0 +1,1 @@
+﻿Get-DhcpServerv4Lease -BadLeases | Out-File $home\Desktop\Bad_Address_List.txt -Append -NoClobber 
