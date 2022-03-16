@@ -1,0 +1,16 @@
+$computers = Get-Content -Path $home\Desktop\list.txt
+
+$samacct = @()
+
+
+foreach($computer in $computers){
+  $samacct += Get-ADComputer -filter { cn -like $computer }  -Properties samaccountname | select samaccountname
+}
+
+foreach($computer in $computers) {
+  #Set Description of Computer and disable
+  set-adcomputer -Identity $computer -Enabled $false -description "WHATEVER DESCRIPTION YOU WANT ADDED."
+}
+
+#Add Computer to group
+Add-ADGroupMember -Id 'GROUP_NAME' -Members $SAMAcct
